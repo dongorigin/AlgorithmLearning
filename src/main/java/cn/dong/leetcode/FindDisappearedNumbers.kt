@@ -3,6 +3,11 @@ package cn.dong.leetcode
 import org.junit.Test
 
 /**
+ * Source: 448 https://leetcode.com/problems/find-all-numbers-disappeared-in-an-array/description/
+ *
+ * Other people's solution: https://leetcode.com/problems/find-all-numbers-disappeared-in-an-array/discuss/92956/Java-accepted-simple-solution
+ * 通过负数标记元素存在，最后查一遍标记，非负数的位置都是不存在的
+ *
  * @author dong on 2018/08/23.
  */
 class Solution {
