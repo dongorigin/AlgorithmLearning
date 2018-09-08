@@ -3,23 +3,45 @@ import java.util.*
 /**
  * @author dong on 2018/09/08.
  */
-fun <T> breadthFirstSearch(graph: Map<T, Array<T>>, start: T, isTarget: (T) -> Boolean): Boolean {
-    val startNodes = graph[start] ?: throw IllegalArgumentException("graph[start] is null")
+fun <T> breadthFirstSearch(graph: Map<T, Array<T>>, start: T, isTarget: (T) -> Boolean): List<T> {
+    checkNotNull(graph[start]) { "graph[start] should not be null" }
 
     val searchQueue = ArrayDeque<T>()
     val searched = mutableSetOf<T>()
+    val parents = mutableMapOf<T, T>()
 
-    searchQueue.addAll(startNodes)
+    val addToSearchQueue = { node: T ->
+        graph[node]?.let { neighbors ->
+            neighbors.forEach {
+                searchQueue.add(it)
+                parents[it] = node
+            }
+        }
+    }
+
+    addToSearchQueue(start)
     while (searchQueue.isNotEmpty()) {
         val node = searchQueue.pop()
         if (!searched.contains(node) && isTarget(node)) {
-            return true
+            return findPath(parents, node)
         } else {
-            graph[node]?.let { searchQueue.addAll(it) }
+            addToSearchQueue(node)
             searched.add(node)
         }
     }
-    return false
+    return emptyList()
+}
+
+private fun <T> findPath(parents: Map<T, T>, end: T): List<T> {
+    val path = mutableListOf<T>()
+
+    var node: T? = end
+    while (node != null) {
+        path.add(node)
+        node = parents[node]
+    }
+
+    return path.reversed()
 }
 
 fun main(args: Array<String>) {
