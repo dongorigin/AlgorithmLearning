@@ -1,7 +1,5 @@
 package cn.dong.leetcode
 
-import org.junit.Test
-
 /**
  * Source: 448 https://leetcode.com/problems/find-all-numbers-disappeared-in-an-array/description/
  *
@@ -46,7 +44,6 @@ class Solution {
     }
 }
 
-@Test
 fun main(args: Array<String>) {
     val input = intArrayOf(4, 3, 2, 7, 8, 2, 3, 1)
     val output = Solution().findDisappearedNumbers(input)
