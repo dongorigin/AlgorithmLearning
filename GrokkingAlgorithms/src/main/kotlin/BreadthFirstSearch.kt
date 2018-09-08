@@ -10,22 +10,22 @@ fun <T> breadthFirstSearch(graph: Map<T, Array<T>>, start: T, isTarget: (T) -> B
     val searched = mutableSetOf<T>()
     val parents = mutableMapOf<T, T>()
 
-    val addToSearchQueue = { node: T ->
-        graph[node]?.let { neighbors ->
-            neighbors.forEach {
+    val addChildNodesToSearchQueue = { node: T ->
+        graph[node]?.let { childNodes ->
+            childNodes.forEach {
                 searchQueue.add(it)
                 parents[it] = node
             }
         }
     }
 
-    addToSearchQueue(start)
+    addChildNodesToSearchQueue(start)
     while (searchQueue.isNotEmpty()) {
         val node = searchQueue.pop()
         if (!searched.contains(node) && isTarget(node)) {
             return findPath(parents, node)
         } else {
-            addToSearchQueue(node)
+            addChildNodesToSearchQueue(node)
             searched.add(node)
         }
     }
