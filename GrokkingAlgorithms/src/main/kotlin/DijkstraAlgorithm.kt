@@ -11,10 +11,11 @@ fun <Node> findShortestPath(graph: WeightedGraph<Node>, start: Node, end: Node):
     while (node != null) {
         val childNodes = graph[node] ?: throw IllegalArgumentException("node [$node] not exist in the graph")
         for ((childNode, cost) in childNodes) {
-            val childNodeOldCost = costs[childNode] ?: Int.MAX_VALUE
-            val childNodeNewCost = costs[node]!! + cost // 从 start 到 childNode 的 cost
-            if (childNodeNewCost < childNodeOldCost) {
-                costs[childNode] = childNodeNewCost
+            // cost from [start] to [childNode]
+            val oldCost = costs[childNode] ?: Int.MAX_VALUE
+            val newCost = costs[node]!! + cost
+            if (newCost < oldCost) {
+                costs[childNode] = newCost
                 parents[childNode] = node
             }
         }
