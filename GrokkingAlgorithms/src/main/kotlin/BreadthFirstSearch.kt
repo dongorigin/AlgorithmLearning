@@ -3,7 +3,7 @@ import java.util.*
 /**
  * @author dong on 2018/09/08.
  */
-fun <T> breadthFirstSearch(graph: Map<T, Array<T>>, start: T, isTarget: (T) -> Boolean): List<T> {
+fun <T> breadthFirstSearch(graph: Graph<T>, start: T, isTarget: (T) -> Boolean): List<T> {
     checkNotNull(graph[start]) { "graph[start] should not be null" }
 
     val searchQueue = ArrayDeque<T>()
@@ -32,6 +32,8 @@ fun <T> breadthFirstSearch(graph: Map<T, Array<T>>, start: T, isTarget: (T) -> B
     return emptyList()
 }
 
+class Graph<Node> : HashMap<Node, Array<Node>>()
+
 private fun <T> findPath(parents: Map<T, T>, end: T): List<T> {
     val path = mutableListOf<T>()
 
@@ -45,7 +47,7 @@ private fun <T> findPath(parents: Map<T, T>, end: T): List<T> {
 }
 
 fun main(args: Array<String>) {
-    val graph = mutableMapOf<String, Array<String>>()
+    val graph = Graph<String>()
     graph["you"] = arrayOf("alice", "bob", "claire")
     graph["bob"] = arrayOf("anuj", "peggy")
     graph["alice"] = arrayOf("peggy")
