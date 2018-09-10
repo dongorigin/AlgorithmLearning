@@ -3,32 +3,25 @@
  */
 
 /**
- * a=hish b=fish
- *
- *   h i s h
- * f 0 0 0 0
- * i 0 1 0 0
- * s 0 0 2 0
- * h 0 0 0 3
+ *   0 h i s h
+ * 0 0 0 0 0 0
+ * f 0 0 0 0 0
+ * i 0 0 1 0 0
+ * s 0 0 0 2 0
+ * h 0 0 0 0 3
  *
  * @return longest common substring length
  */
 fun longestCommonSubstring(wordA: String, wordB: String): Int {
-    val grid: Array<Array<Int>> = Array(wordA.length) { Array(wordB.length) { 0 } }
+    val grid: Array<Array<Int>> = Array(wordA.length + 1) { Array(wordB.length + 1) { 0 } }
 
     var longestLength = 0
-    for (i in 0 until wordA.length) {
-        for (j in 0 until wordB.length) {
-            if (wordA[i] == wordB[j]) {
-                val previousLength = if (i > 0 && j > 0) {
-                    grid[i - 1][j - 1]
-                } else {
-                    0
-                }
-                val newLength = previousLength + 1
-                grid[i][j] = newLength
-                if (longestLength < newLength) {
-                    longestLength = newLength
+    for (i in 1..wordA.length) {
+        for (j in 1..wordB.length) {
+            if (wordA[i - 1] == wordB[j - 1]) {
+                grid[i][j] = grid[i - 1][j - 1] + 1
+                if (longestLength < grid[i][j]) {
+                    longestLength = grid[i][j]
                 }
             } else {
                 grid[i][j] = 0
