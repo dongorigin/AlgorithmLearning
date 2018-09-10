@@ -7,9 +7,9 @@
  *
  *   h i s h
  * f 0 0 0 0
- * i 0 0 0 0
- * s 0 0 0 0
- * h 0 0 0 0
+ * i 0 1 0 0
+ * s 0 0 2 0
+ * h 0 0 0 3
  *
  * @return longest common substring length
  */
