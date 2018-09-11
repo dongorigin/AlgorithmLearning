@@ -13,7 +13,7 @@
  * @return longest common substring length
  */
 fun longestCommonSubstring(wordA: String, wordB: String): Int {
-    val grid: Array<Array<Int>> = Array(wordA.length + 1) { Array(wordB.length + 1) { 0 } }
+    val grid: Array<IntArray> = Array(wordA.length + 1) { IntArray(wordB.length + 1) { 0 } }
 
     var longestLength = 0
     for (i in 1..wordA.length) {
