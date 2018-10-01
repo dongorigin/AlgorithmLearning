@@ -10,6 +10,10 @@ fun main(args: Array<String>) {
     val input = intArrayOf(2, 3, 1, 0, 2, 5)
     val result = duplicate(input)
     check(result == true)
+
+    val input2 = intArrayOf(5, 1, 3, 2, 4, 0)
+    val result2 = duplicate(input2)
+    check(result2 == false)
 }
 
 fun duplicate(numbers: IntArray): Boolean {
