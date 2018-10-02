@@ -51,6 +51,8 @@ class LinkedList<E> : Iterable<E> {
         return false
     }
 
+    fun getHead() = first
+
     class Node<E>(
             val item: E,
             var next: Node<E>? = null)
