@@ -1,5 +1,7 @@
 package cn.dong.interviews
 
+import org.hamcrest.CoreMatchers.`is`
+import org.hamcrest.MatcherAssert.assertThat
 import org.spekframework.spek2.Spek
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
@@ -30,6 +32,14 @@ object BinaryTreeSpecs : Spek({
             val array = arrayOf("#", "a")
             val binaryTree = BinaryTree.Creator(array) { it == "#" }.create()
             assertTrue(binaryTree.isEmpty())
+        }
+    }
+    group("traversal") {
+        val array = arrayOf("a", "b", "#", "d", "#", "#", "c")
+        val tree = BinaryTree.Creator(array, { it == "#" }).create()
+
+        test("pre-order traversal") {
+            assertThat(tree.preOrderTraversal(), `is`(listOf("a", "b", "d", "c")))
         }
     }
 })
