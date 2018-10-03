@@ -14,7 +14,7 @@ object BinaryTreeSpecs : Spek({
         test("common") {
             val array = arrayOf("a", "b", "#", "d", "#", "#", "c")
             val binaryTree = BinaryTree.Creator(array) { it == "#" }.create()
-            val root = binaryTree.getRoot()
+            val root = binaryTree.root
             assertEquals("a", root!!.item)
             assertEquals("b", root.left!!.item)
             assertEquals(null, root.left!!.left)

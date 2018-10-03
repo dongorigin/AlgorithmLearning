@@ -4,7 +4,7 @@ package cn.dong.interviews
  * @author dong on 2018/10/02.
  */
 class BinaryTree<E> {
-    private var root: Node<E>? = null
+    var root: Node<E>? = null // 因算法需要而暴露，通常情况下应该隐藏内部实现
 
     fun isEmpty(): Boolean = root == null
 
@@ -12,8 +12,6 @@ class BinaryTree<E> {
         var left: Node<E>? = null
         var right: Node<E>? = null
     }
-
-    fun getRoot(): Node<E>? = root
 
     fun preOrderTraversal(): List<E> {
         val list = mutableListOf<E>()
