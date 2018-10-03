@@ -9,7 +9,7 @@ import kotlin.test.assertFailsWith
  * @author dong on 2018/10/03.
  */
 class StackSpecs : Spek({
-    val stack by memoized { Stack<Int>() }
+    val stack by memoized { Stack<String>() }
 
     describe("a stack") {
         it("empty pop") {
@@ -18,21 +18,27 @@ class StackSpecs : Spek({
             assertFailsWith(NoSuchElementException::class) { stack.pop() }
         }
         it("push one item and pop") {
-            stack.push(5)
+            stack.push("a")
             assertEquals(false, stack.isEmpty())
             assertEquals(1, stack.size)
 
-            assertEquals(5, stack.pop())
+            assertEquals("a", stack.pop())
             assertEquals(true, stack.isEmpty())
             assertFailsWith(NoSuchElementException::class) { stack.pop() }
         }
         it("push two item and pop") {
-            stack.push(1)
-            stack.push(2)
+            stack.push("a")
+            stack.push("b")
             assertEquals(2, stack.size)
 
-            assertEquals(2, stack.pop())
-            assertEquals(1, stack.pop())
+            assertEquals("b", stack.pop())
+            assertEquals(1, stack.size)
+
+            stack.push("c")
+            assertEquals(2, stack.size)
+
+            assertEquals("c", stack.pop())
+            assertEquals("a", stack.pop())
             assertFailsWith(NoSuchElementException::class) { stack.pop() }
         }
     }
