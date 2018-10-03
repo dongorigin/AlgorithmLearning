@@ -28,6 +28,32 @@ class BinaryTree<E> {
         preOrderTraversal(node.right, list)
     }
 
+    fun inOrderTraversal(): List<E> {
+        val list = mutableListOf<E>()
+        inOrderTraversal(root, list)
+        return list
+    }
+
+    private fun inOrderTraversal(node: Node<E>?, list: MutableList<E>) {
+        if (node == null) return // recursion exit
+        inOrderTraversal(node.left, list)
+        list.add(node.item)
+        inOrderTraversal(node.right, list)
+    }
+
+    fun postOrderTraversal(): List<E> {
+        val list = mutableListOf<E>()
+        postOrderTraversal(root, list)
+        return list
+    }
+
+    private fun postOrderTraversal(node: Node<E>?, list: MutableList<E>) {
+        if (node == null) return // recursion exit
+        postOrderTraversal(node.left, list)
+        postOrderTraversal(node.right, list)
+        list.add(node.item)
+    }
+
     /**
      * 通过扩展前序序列构造二叉树。[predicate] `true` 表示空树叶
      * 比如 [a,b,#,#,c], # 表示空树叶

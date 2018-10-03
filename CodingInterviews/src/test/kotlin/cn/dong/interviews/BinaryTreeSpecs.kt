@@ -35,11 +35,20 @@ object BinaryTreeSpecs : Spek({
         }
     }
     group("traversal") {
+        //    a
+        //  b   c
+        // # d # #
         val array = arrayOf("a", "b", "#", "d", "#", "#", "c")
         val tree = BinaryTree.Creator(array, { it == "#" }).create()
 
         test("pre-order traversal") {
             assertThat(tree.preOrderTraversal(), `is`(listOf("a", "b", "d", "c")))
+        }
+        test("in-order traversal") {
+            assertThat(tree.inOrderTraversal(), `is`(listOf("b", "d", "a", "c")))
+        }
+        test("post-order traversal") {
+            assertThat(tree.postOrderTraversal(), `is`(listOf("d", "b", "c", "a")))
         }
     }
 })
