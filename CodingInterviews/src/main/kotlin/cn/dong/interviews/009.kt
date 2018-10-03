@@ -6,14 +6,14 @@ package cn.dong.interviews
  * @author dong on 2018/10/03.
  */
 fun main(args: Array<String>) {
-    val queue = Queue<Int>()
+    val queue = QueueWithStack<Int>()
     queue.enqueue(1)
     queue.enqueue(2)
     println(queue.dequeue())
     println(queue.dequeue())
 }
 
-class Queue<E> {
+class QueueWithStack<E> {
     private val pushStack = Stack<E>()
     private val popStack = Stack<E>()
 
