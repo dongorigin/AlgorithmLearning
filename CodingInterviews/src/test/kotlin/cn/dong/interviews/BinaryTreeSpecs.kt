@@ -50,5 +50,8 @@ object BinaryTreeSpecs : Spek({
         test("post-order traversal") {
             assertThat(tree.postOrderTraversal(), `is`(listOf("d", "b", "c", "a")))
         }
+        test("breadth-first traversal") {
+            assertThat(tree.breadthFirstTraversal(), `is`(listOf("a", "b", "c", "d")))
+        }
     }
 })
