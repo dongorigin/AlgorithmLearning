@@ -14,6 +14,8 @@ class Queue<E> {
 
     fun isEmpty(): Boolean = size == 0
 
+    fun isNotEmpty(): Boolean = size > 0
+
     fun enqueue(item: E) {
         val newNode = Node(item)
         if (isEmpty()) {

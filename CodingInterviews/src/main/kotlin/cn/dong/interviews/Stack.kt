@@ -23,7 +23,9 @@ class Stack<E> {
         } ?: throw NoSuchElementException("can't pop, stack is empty")
     }
 
-    fun isEmpty(): Boolean = head == null
+    fun isEmpty(): Boolean = size == 0
+
+    fun isNotEmpty(): Boolean = size > 0
 
     private class Node<E>(
             val item: E,
