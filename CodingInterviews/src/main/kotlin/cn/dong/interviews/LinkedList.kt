@@ -5,7 +5,8 @@ package cn.dong.interviews
  * @author dong on 2018/10/02.
  */
 class LinkedList<E>() : Iterable<E> {
-    private var first: Node<E>? = null
+    var first: Node<E>? = null // 因算法需要而暴露，通常情况下应该隐藏内部实现
+
     var size = 0
         private set
 
@@ -16,8 +17,6 @@ class LinkedList<E>() : Iterable<E> {
     }
 
     fun isEmpty(): Boolean = size == 0
-
-    fun getHead() = first  // 因算法需要而暴露，通常情况下应该隐藏内部实现
 
     fun add(element: E) {
         val newNode = Node(element)

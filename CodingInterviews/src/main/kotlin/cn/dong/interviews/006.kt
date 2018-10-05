@@ -14,7 +14,7 @@ fun main(args: Array<String>) {
  * 递归实现，不适用大量数据，会栈溢出
  */
 fun <E> reversePrintLinkedList(list: LinkedList<E>) {
-    printNextNode(list.getHead())
+    printNextNode(list.first)
 }
 
 fun <E> printNextNode(node: LinkedList.Node<E>?) {
