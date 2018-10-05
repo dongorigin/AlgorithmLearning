@@ -6,10 +6,7 @@ package cn.dong.interviews
  * @author dong on 2018/10/02.
  */
 fun main(args: Array<String>) {
-    val linkedList = LinkedList<Int>()
-    for (i in 1..5) {
-        linkedList.add(i)
-    }
+    val linkedList = LinkedList(listOf(1, 2, 3, 4, 5))
     reversePrintLinkedList(linkedList)
 }
 

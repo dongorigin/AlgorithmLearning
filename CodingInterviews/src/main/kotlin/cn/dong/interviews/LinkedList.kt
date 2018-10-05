@@ -4,13 +4,20 @@ package cn.dong.interviews
  *
  * @author dong on 2018/10/02.
  */
-class LinkedList<E> : Iterable<E> {
+class LinkedList<E>() : Iterable<E> {
     private var first: Node<E>? = null
-    private var size = 0
+    var size = 0
+        private set
 
-    fun size(): Int = size
+    constructor(iterable: Iterable<E>) : this() {
+        for (item in iterable.iterator()) {
+            add(item)
+        }
+    }
 
     fun isEmpty(): Boolean = size == 0
+
+    fun getHead() = first  // 因算法需要而暴露，通常情况下应该隐藏内部实现
 
     fun add(element: E) {
         val newNode = Node(element)
@@ -50,8 +57,6 @@ class LinkedList<E> : Iterable<E> {
         }
         return false
     }
-
-    fun getHead() = first
 
     class Node<E>(
             val item: E,
