@@ -32,11 +32,20 @@ private fun Double.powerWithNonNegative(exponent: Int): Double {
 }
 
 fun main(args: Array<String>) {
+    // positive base
     assertEquals(1.0, 2.0.power(0))
     assertEquals(2.0, 2.0.power(1))
     assertEquals(16.0, 2.0.power(4))
     assertEquals(1024.0, 2.0.power(10))
     assertEquals(0.25, 2.0.power(-2))
+
+    // negative base
+    assertEquals(1.0, (-2.0).power(0))
+    assertEquals(-2.0, (-2.0).power(1))
+    assertEquals(4.0, (-2.0).power(2))
+    assertEquals(-8.0, (-2.0).power(3))
+    assertEquals(-0.5, (-2.0).power(-1))
+    assertEquals(0.25, (-2.0).power(-2))
 
     assertEquals(1.0, 0.0.power(0))
     assertEquals(0.0, 0.0.power(2))
