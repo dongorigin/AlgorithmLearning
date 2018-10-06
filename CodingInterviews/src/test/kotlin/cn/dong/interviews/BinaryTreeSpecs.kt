@@ -36,7 +36,9 @@ object BinaryTreeSpecs : Spek({
     }
     group("traversal") {
         //    a
+        //   / \
         //  b   c
+        // / \ / \
         // # d # #
         val array = arrayOf("a", "b", "#", "d", "#", "#", "c")
         val tree = BinaryTree.Creator(array, { it == "#" }).create()
