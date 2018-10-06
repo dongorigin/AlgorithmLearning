@@ -25,7 +25,6 @@ fun duplicate(numbers: IntArray): Boolean {
             } else {
                 numbers.swap(index, numbers[index])
             }
-
         }
     }
     return false
