@@ -5,8 +5,8 @@ package cn.dong.interviews;
  */
 public class TopK {
     public static int topK(int[] numbers, int k) {
-        if (k < 0 || k >= numbers.length) {
-            return -1;
+        if (numbers == null || k < 0 || k >= numbers.length) {
+            throw new IllegalArgumentException("numbers is null or k out of bounds");
         }
         int start = 0;
         int end = numbers.length - 1;
