@@ -9,6 +9,7 @@ repositories {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    implementation 'junit:junit:4.12'
 
     // Dependencies for local unit tests
     testImplementation 'junit:junit:4.12'
