@@ -53,7 +53,7 @@ public class BinarySearch {
     }
 
     // >= target
-    public static int searchGreaterThanOrEqualTo(int[] a, int target) {
+    public static int searchFirstGreaterThanOrEqualTo(int[] a, int target) {
         int low = 0;
         int high = a.length - 1;
         while (low <= high) {
@@ -73,7 +73,7 @@ public class BinarySearch {
     }
 
     // <= target
-    public static int searchLessThanOrEqualTo(int[] a, int target) {
+    public static int searchLastLessThanOrEqualTo(int[] a, int target) {
         int low = 0;
         int high = a.length - 1;
         while (low <= high) {
@@ -108,15 +108,15 @@ public class BinarySearch {
         assertEquals(-1, searchLast(input, 0));
         assertEquals(-1, searchLast(input, 6));
 
-        assertEquals(4, searchGreaterThanOrEqualTo(input, 3));
-        assertEquals(7, searchGreaterThanOrEqualTo(input, 5));
-        assertEquals(0, searchGreaterThanOrEqualTo(input, 0));
-        assertEquals(-1, searchGreaterThanOrEqualTo(input, 8));
+        assertEquals(4, searchFirstGreaterThanOrEqualTo(input, 3));
+        assertEquals(7, searchFirstGreaterThanOrEqualTo(input, 5));
+        assertEquals(0, searchFirstGreaterThanOrEqualTo(input, 0));
+        assertEquals(-1, searchFirstGreaterThanOrEqualTo(input, 8));
 
-        assertEquals(4, searchLessThanOrEqualTo(input, 3));
-        assertEquals(6, searchLessThanOrEqualTo(input, 5));
-        assertEquals(7, searchLessThanOrEqualTo(input, 8));
-        assertEquals(0, searchLessThanOrEqualTo(input, 1));
-        assertEquals(-1, searchLessThanOrEqualTo(input, 0));
+        assertEquals(4, searchLastLessThanOrEqualTo(input, 3));
+        assertEquals(6, searchLastLessThanOrEqualTo(input, 5));
+        assertEquals(7, searchLastLessThanOrEqualTo(input, 8));
+        assertEquals(0, searchLastLessThanOrEqualTo(input, 1));
+        assertEquals(-1, searchLastLessThanOrEqualTo(input, 0));
     }
 }
