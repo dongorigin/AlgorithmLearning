@@ -11,46 +11,29 @@ import static org.junit.Assert.assertEquals;
  */
 public class SearchInRotatedSortedArray {
 
-    public static int search(final int[] nums, final int target) {
-        return search(nums, target, 0, nums.length - 1);
-    }
-
-    public static int search(final int[] nums, final int target, final int low, final int high) {
-        if (low > high) return -1; // recursion exit
-        final int mid = (low + high) >>> 1;
-        final int midVal = nums[mid];
-        if (midVal == target) {
-            return mid; // hit
-        }
-        if (midVal >= nums[low]) {
-            // left is sorted, right is rotated
-            if (nums[low] <= target && target < midVal) {
-                return searchInSortedRange(nums, target, low, mid - 1);
-            } else {
-                return search(nums, target, mid + 1, high);
-            }
-        } else {
-            // left is rotated, right is sorted
-            if (midVal < target && target <= nums[high]) {
-                return searchInSortedRange(nums, target, mid + 1, high);
-            } else {
-                return search(nums, target, low, mid - 1);
-            }
-        }
-    }
-
-    public static int searchInSortedRange(int[] nums, int target, int fromIndex, int toIndex) {
-        int low = fromIndex;
-        int high = toIndex;
+    public static int search(int[] nums, int target) {
+        int low = 0;
+        int high = nums.length - 1;
         while (low <= high) {
             int mid = (low + high) >>> 1;
             int midVal = nums[mid];
-            if (target < midVal) {
-                high = mid - 1;
-            } else if (target > midVal) {
-                low = mid + 1;
-            } else {
+            if (target == midVal) {
                 return mid;
+            }
+            if (nums[low] <= midVal) {
+                // left is sorted, right is rotated.
+                if (nums[low] <= target && target < midVal) {
+                    high = mid - 1;
+                } else {
+                    low = mid + 1;
+                }
+            } else {
+                // left is rotated, right is sorted.
+                if (midVal < target && target <= nums[high]) {
+                    low = mid + 1;
+                } else {
+                    high = mid - 1;
+                }
             }
         }
         return -1;
