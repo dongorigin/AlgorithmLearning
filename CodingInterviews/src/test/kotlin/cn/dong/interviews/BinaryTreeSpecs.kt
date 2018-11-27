@@ -44,12 +44,14 @@ object BinaryTreeSpecs : Spek({
         val tree = BinaryTree.Creator(array, { it == "#" }).create()
 
         test("pre-order traversal") {
-            assertThat(tree.preOrderTraversal(), `is`(listOf("a", "b", "d", "c")))
-            assertThat(tree.preOrderTraversalNonRecursion(), `is`(listOf("a", "b", "d", "c")))
+            val expect = listOf("a", "b", "d", "c")
+            assertThat(tree.preOrderTraversal(), `is`(expect))
+            assertThat(tree.preOrderTraversalNonRecursion(), `is`(expect))
         }
         test("in-order traversal") {
-            assertThat(tree.inOrderTraversal(), `is`(listOf("b", "d", "a", "c")))
-            assertThat(tree.inOrderTraversalNonRecursion(), `is`(listOf("b", "d", "a", "c")))
+            val expect = listOf("b", "d", "a", "c")
+            assertThat(tree.inOrderTraversal(), `is`(expect))
+            assertThat(tree.inOrderTraversalNonRecursion(), `is`(expect))
         }
         test("post-order traversal") {
             assertThat(tree.postOrderTraversal(), `is`(listOf("d", "b", "c", "a")))
