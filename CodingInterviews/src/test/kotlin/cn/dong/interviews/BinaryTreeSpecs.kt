@@ -45,9 +45,11 @@ object BinaryTreeSpecs : Spek({
 
         test("pre-order traversal") {
             assertThat(tree.preOrderTraversal(), `is`(listOf("a", "b", "d", "c")))
+            assertThat(tree.preOrderTraversalNonRecursion(), `is`(listOf("a", "b", "d", "c")))
         }
         test("in-order traversal") {
             assertThat(tree.inOrderTraversal(), `is`(listOf("b", "d", "a", "c")))
+            assertThat(tree.inOrderTraversalNonRecursion(), `is`(listOf("b", "d", "a", "c")))
         }
         test("post-order traversal") {
             assertThat(tree.postOrderTraversal(), `is`(listOf("d", "b", "c", "a")))

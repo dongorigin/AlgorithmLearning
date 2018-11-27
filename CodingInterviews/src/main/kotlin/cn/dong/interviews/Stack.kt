@@ -23,6 +23,10 @@ class Stack<E> {
         } ?: throw NoSuchElementException("can't pop, stack is empty")
     }
 
+    fun peek(): E {
+        return head?.item ?: throw NoSuchElementException("stack is empty")
+    }
+
     fun isEmpty(): Boolean = size == 0
 
     fun isNotEmpty(): Boolean = size > 0

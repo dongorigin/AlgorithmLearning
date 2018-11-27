@@ -45,6 +45,47 @@ class BinaryTree<E> {
         return list
     }
 
+    private fun postOrderTraversal(node: Node<E>?, list: MutableList<E>) {
+        if (node == null) return // recursion exit
+        postOrderTraversal(node.left, list)
+        postOrderTraversal(node.right, list)
+        list.add(node.item)
+    }
+
+    fun preOrderTraversalNonRecursion(): List<E> {
+        val result = mutableListOf<E>()
+        val stack = Stack<Node<E>>()
+        var target = root
+        while (target != null || stack.isNotEmpty()) {
+            while (target != null) {
+                result.add(target.item)
+                stack.push(target)
+                target = target.left
+            }
+            stack.pop().let {
+                target = it.right
+            }
+        }
+        return result
+    }
+
+    fun inOrderTraversalNonRecursion(): List<E> {
+        val result = mutableListOf<E>()
+        val stack = Stack<Node<E>>()
+        var target = root
+        while (target != null || stack.isNotEmpty()) {
+            while (target != null) {
+                stack.push(target)
+                target = target.left
+            }
+            stack.pop().let {
+                result.add(it.item)
+                target = it.right
+            }
+        }
+        return result
+    }
+
     fun breadthFirstTraversal(): List<E> {
         val list = mutableListOf<E>()
         val queue = Queue<Node<E>>()
@@ -56,13 +97,6 @@ class BinaryTree<E> {
             node.right?.let { queue.enqueue(it) }
         }
         return list
-    }
-
-    private fun postOrderTraversal(node: Node<E>?, list: MutableList<E>) {
-        if (node == null) return // recursion exit
-        postOrderTraversal(node.left, list)
-        postOrderTraversal(node.right, list)
-        list.add(node.item)
     }
 
     /**
