@@ -1,3 +1,5 @@
+package cn.dong.grokking
+
 import kotlin.math.max
 
 /**
