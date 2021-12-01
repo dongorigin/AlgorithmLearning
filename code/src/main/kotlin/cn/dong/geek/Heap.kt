@@ -13,7 +13,8 @@ class Heap(private val capacity: Int) {
     private var count = 0
 
     fun insert(item: Int) {
-        if (count >= capacity) throw IllegalStateException("")
+        if (count >= capacity) throw IllegalStateException("count exceed capacity")
+
         count++
         items[count] = item
 
@@ -25,10 +26,47 @@ class Heap(private val capacity: Int) {
         }
     }
 
+    fun removeTop() {
+        if (count < 1) throw IllegalStateException("no item")
+
+        items[1] = items[count]
+        items[count] = 0
+        count--
+
+        items.heapify(1, count)
+    }
+
     override fun toString(): String {
         return items.contentToString()
     }
+}
 
+/** 数组部分堆化 */
+fun IntArray.heapify(start: Int, end: Int) {
+    var i = start
+    while (true) {
+        val left = i * 2
+        val right = i * 2 + 1
+        val maxLeaf = if (right <= end) {
+            if (this[left] > this[right]) {
+                left
+            } else {
+                right
+            }
+        } else if (left <= end) {
+            left
+        } else {
+            break
+        }
+
+        if (this[i] < this[maxLeaf]) {
+            this.swap(i, maxLeaf)
+            i = maxLeaf
+            continue
+        } else {
+            break
+        }
+    }
 }
 
 fun main() {
@@ -39,5 +77,9 @@ fun main() {
     heap.insert(3)
     heap.insert(7)
     heap.insert(5)
+    println(heap)
+    heap.removeTop()
+    println(heap)
+    heap.removeTop()
     println(heap)
 }
