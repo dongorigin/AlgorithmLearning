@@ -1,6 +1,6 @@
 package cn.dong.leetcode
 
-import org.junit.Assert.assertEquals
+import kotlin.test.assertEquals
 import java.util.*
 
 class Solution678 {

@@ -1,15 +1,14 @@
 package cn.dong.interviews
 
-import org.spekframework.spek2.Spek
-import org.spekframework.spek2.style.specification.describe
+import io.kotest.core.spec.style.DescribeSpec
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 
 /**
  * @author dong on 2018/10/03.
  */
-class StackSpecs : Spek({
-    val stack by memoized { Stack<String>() }
+class StackSpecs : DescribeSpec({
+    val stack = Stack<String>()
 
     describe("a stack") {
         it("empty pop") {

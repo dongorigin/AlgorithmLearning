@@ -1,15 +1,19 @@
 package cn.dong.interviews
 
-import org.spekframework.spek2.Spek
+import io.kotest.core.spec.style.FunSpec
 import kotlin.test.assertEquals
 
 /**
  * @author dong on 2018/10/02.
  */
-object LinkedListSpecs : Spek({
-    val list by memoized { LinkedList<String>() }
+class LinkedListSpecs : FunSpec({
+    var list = LinkedList<String>()
 
-    group("a linked list") {
+    beforeEach {
+        list = LinkedList<String>()
+    }
+
+    context("a linked list") {
         test("empty") {
             assertEquals(0, list.size)
             assertEquals(true, list.isEmpty())

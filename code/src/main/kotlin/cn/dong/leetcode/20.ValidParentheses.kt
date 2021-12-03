@@ -1,7 +1,7 @@
 package cn.dong.leetcode
 
-import org.junit.Assert.assertEquals
 import java.util.*
+import kotlin.test.assertEquals
 
 class ValidParenthesesChecker {
 
