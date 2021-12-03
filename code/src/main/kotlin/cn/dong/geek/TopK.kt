@@ -32,6 +32,8 @@ fun IntArray.topK(k: Int): IntArray {
 }
 
 fun IntArray.topK2(k: Int): IntArray {
+    if (k <= 0) return IntArray(0)
+
     val priorityQueue = PriorityQueue<Int>(k)
     for (i in this) {
         if (priorityQueue.size < k) {
@@ -54,16 +56,24 @@ data class TopKData(
 )
 
 class TopKTests : FunSpec({
-    context("tests") {
-        withData(
-            TopKData(intArrayOf(), 3, intArrayOf()),
-            TopKData(intArrayOf(1, 2, 3), 0, intArrayOf()),
-            TopKData(intArrayOf(1, 2, 3), -1, intArrayOf()),
-            TopKData(intArrayOf(1, 2, 3), 1, intArrayOf(3)),
-            TopKData(intArrayOf(1, 2, 3), 5, intArrayOf(1, 2, 3)),
-            TopKData(intArrayOf(1, 2, 3, 4, 5), 3, intArrayOf(3, 4, 5)),
-        ) { (array, k, topK) ->
+
+    val cases = listOf(
+        TopKData(intArrayOf(), 3, intArrayOf()),
+        TopKData(intArrayOf(1, 2, 3), 0, intArrayOf()),
+        TopKData(intArrayOf(1, 2, 3), -1, intArrayOf()),
+        TopKData(intArrayOf(1, 2, 3), 1, intArrayOf(3)),
+        TopKData(intArrayOf(1, 2, 3), 5, intArrayOf(1, 2, 3)),
+        TopKData(intArrayOf(1, 2, 3, 4, 5), 3, intArrayOf(3, 4, 5)),
+    )
+
+    context("test topK") {
+        withData(cases) { (array, k, topK) ->
             array.topK(k).toTypedArray() shouldContainExactly topK.toTypedArray()
+        }
+    }
+    context("test topK2") {
+        withData(cases) { (array, k, topK) ->
+            array.topK2(k).toTypedArray() shouldContainExactly topK.toTypedArray()
         }
     }
 })
