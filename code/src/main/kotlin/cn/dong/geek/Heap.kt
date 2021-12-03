@@ -47,12 +47,8 @@ fun IntArray.heapify(start: Int, end: Int) {
     while (true) {
         val left = i * 2
         val right = i * 2 + 1
-        val maxLeaf = if (right <= end) {
-            if (this[left] > this[right]) {
-                left
-            } else {
-                right
-            }
+        val maxLeaf = if (right <= end && this[right] > this[left]) {
+            right
         } else if (left <= end) {
             left
         } else {
