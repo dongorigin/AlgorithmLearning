@@ -1,5 +1,9 @@
 package cn.dong.geek
 
+import io.kotest.core.spec.style.FunSpec
+import io.kotest.datatest.IsStableType
+import io.kotest.datatest.withData
+import io.kotest.matchers.collections.shouldContainExactly
 import java.util.*
 
 /**
@@ -42,13 +46,24 @@ fun IntArray.topK2(k: Int): IntArray {
     return priorityQueue.toIntArray()
 }
 
-fun main() {
-    intArrayOf(1, 2, 3, 4, 5).topK2(3).print()
-    intArrayOf(1, 1, 1, 1, 1).topK2(3).print()
-    intArrayOf(5, 4, 3, 2, 1).topK2(3).print()
-    intArrayOf(4, 3, 5, 1, 2).topK2(3).print()
-}
+@IsStableType
+data class TopKData(
+    val a: IntArray,
+    val k: Int,
+    val topK: IntArray
+)
 
-private fun IntArray.print() {
-    println(this.contentToString())
-}
+class TopKTests : FunSpec({
+    context("tests") {
+        withData(
+            TopKData(intArrayOf(), 3, intArrayOf()),
+            TopKData(intArrayOf(1, 2, 3), 0, intArrayOf()),
+            TopKData(intArrayOf(1, 2, 3), -1, intArrayOf()),
+            TopKData(intArrayOf(1, 2, 3), 1, intArrayOf(3)),
+            TopKData(intArrayOf(1, 2, 3), 5, intArrayOf(1, 2, 3)),
+            TopKData(intArrayOf(1, 2, 3, 4, 5), 3, intArrayOf(3, 4, 5)),
+        ) { (array, k, topK) ->
+            array.topK(k).toTypedArray() shouldContainExactly topK.toTypedArray()
+        }
+    }
+})
