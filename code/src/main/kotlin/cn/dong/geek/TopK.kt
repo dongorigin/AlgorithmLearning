@@ -49,13 +49,13 @@ fun IntArray.topK2(k: Int): IntArray {
 }
 
 @IsStableType
-data class TopKData(
+private data class TopKData(
     val a: IntArray,
     val k: Int,
     val topK: IntArray
 )
 
-class TopKTests : FunSpec({
+private class TopKTests : FunSpec({
 
     val cases = listOf(
         TopKData(intArrayOf(), 3, intArrayOf()),

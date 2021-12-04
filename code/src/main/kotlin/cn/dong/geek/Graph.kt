@@ -1,5 +1,9 @@
 package cn.dong.geek
 
+import io.kotest.core.spec.style.FunSpec
+import io.kotest.datatest.IsStableType
+import io.kotest.datatest.withData
+import io.kotest.matchers.collections.shouldContainExactlyInAnyOrder
 import java.util.*
 
 /**
@@ -89,17 +93,41 @@ class Graph(private val vertexCount: Int) {
     }
 }
 
-fun main() {
-    val graph = Graph(6)
-    graph.addEdge(0, 1)
-    graph.addEdge(0, 2)
-    graph.addEdge(1, 3)
-    graph.addEdge(2, 4)
-    println(graph.breadthFirstSearch(0, 4).contentToString())
-    println(graph.breadthFirstSearch(2, 3).contentToString())
-    println(graph.breadthFirstSearch(2, 5).contentToString())
+@IsStableType
+private data class GraphData(
+    val start: Int,
+    val target: Int,
+    val path: IntArray
+)
 
-    println(graph.depthFirstSearch(0, 4).contentToString())
-    println(graph.depthFirstSearch(2, 3).contentToString())
-    println(graph.depthFirstSearch(2, 5).contentToString())
-}
+private class GraphTests : FunSpec({
+
+    val graph = Graph(6).apply {
+        addEdge(0, 2)
+        addEdge(0, 5)
+        addEdge(1, 3)
+        addEdge(2, 4)
+        addEdge(2, 5)
+    }
+
+    context("test bfs") {
+        withData(
+            GraphData(0, 4, intArrayOf(0, 2, 4)),
+            GraphData(2, 3, intArrayOf()),
+            GraphData(0, 5, intArrayOf(0, 5)),
+            GraphData(3, 1, intArrayOf(3, 1)),
+        ) { (start, target, path) ->
+            graph.breadthFirstSearch(start, target).toTypedArray() shouldContainExactlyInAnyOrder path.toTypedArray()
+        }
+    }
+
+    context("test dfs") {
+        withData(
+            GraphData(0, 4, intArrayOf(0, 2, 4)),
+            GraphData(2, 3, intArrayOf()),
+            GraphData(0, 5, intArrayOf(0, 2, 5)),
+        ) { (start, target, path) ->
+            graph.depthFirstSearch(start, target).toTypedArray() shouldContainExactlyInAnyOrder path.toTypedArray()
+        }
+    }
+})
