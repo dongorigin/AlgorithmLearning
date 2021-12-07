@@ -7,7 +7,6 @@ import io.kotest.matchers.ints.shouldBeExactly
 /**
  * @author dong on 2021/12/04.
  */
-
 fun String.findIndexBR(target: String): Int {
     if (target.length > length) return -1
     if (target.isEmpty()) return -1
@@ -28,25 +27,25 @@ fun String.findIndexBR(target: String): Int {
     return -1
 }
 
-fun String.findIndexRK(target: String) {
-
-}
-
-private data class FindData(
+data class StringMatchCase(
     val source: String,
     val target: String,
     val index: Int,
 )
 
-private class FindTests : FunSpec({
-    context("test BR") {
-        withData(
-            FindData("a", "", -1),
-            FindData("", "a", -1),
-            FindData("abc", "abcd", -1),
-            FindData("abcde", "abcde", 0),
-            FindData("abcde", "cd", 2),
-        ) { (source, target, index) ->
+val stringMatchCases = listOf(
+    StringMatchCase("a", "", -1),
+    StringMatchCase("", "a", -1),
+    StringMatchCase("abc", "abcd", -1),
+    StringMatchCase("abcde", "abcde", 0),
+    StringMatchCase("abcde", "cd", 2),
+    StringMatchCase("abcdefghijkabc", "kab", 10),
+)
+
+private class StringBRTests : FunSpec({
+
+    context("test String Match by BR") {
+        withData(stringMatchCases) { (source, target, index) ->
             source.findIndexBR(target) shouldBeExactly index
         }
     }
