@@ -3,7 +3,7 @@ package cn.dong.geek
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.datatest.IsStableType
 import io.kotest.datatest.withData
-import io.kotest.matchers.ints.shouldBeExactly
+import io.kotest.matchers.shouldBe
 import kotlin.math.pow
 
 /**
@@ -16,17 +16,24 @@ fun String.findIndexRK(target: String): Int {
     if (target.isEmpty()) return -1
 
     val targetH = target.hash()
-    var currentH = hash(0, target.length - 1)
-    if (currentH == targetH) {
-        return 0
-    }
-    for (i in 1..length - target.length) {
-        currentH = currentH * 26 - get(i - 1).hash() * 26.pow(target.length) + get(i + target.length - 1).hash()
-        if (currentH == targetH) {
+    var currentH = 0
+    for (i in 0..length - target.length) {
+        currentH = if (i == 0) {
+            hash(0, target.length - 1)
+        } else {
+            currentH * 26 - get(i - 1).hash() * 26.pow(target.length) + get(i + target.length - 1).hash()
+        }
+        if (currentH == targetH && subEquals(i, target)) {
             return i
         }
     }
     return -1
+}
+
+private fun String.subEquals(start: Int, target: String): Boolean {
+    return target.indices.all { i ->
+        target[i] == get(start + i)
+    }
 }
 
 private fun Int.pow(x: Int): Int = toFloat().pow(x).toInt()
@@ -48,6 +55,13 @@ private fun Char.hash(): Int {
 
 private class StringRKTests : FunSpec({
 
+    context("test sub equals") {
+        "abc".subEquals(0, "a") shouldBe true
+        "abc".subEquals(1, "bc") shouldBe true
+        "abc".subEquals(1, "b") shouldBe true
+        "abc".subEquals(1, "be") shouldBe false
+    }
+
     @IsStableType
     data class CharCase(
         val char: Char,
@@ -60,7 +74,7 @@ private class StringRKTests : FunSpec({
             CharCase('b', 2),
             CharCase('z', 26))
         { (char, hash) ->
-            char.hash() shouldBeExactly hash
+            char.hash() shouldBe hash
         }
     }
 
@@ -84,13 +98,13 @@ private class StringRKTests : FunSpec({
             } else {
                 str.hash()
             }
-            strHash shouldBeExactly hash
+            strHash shouldBe hash
         }
     }
 
     context("test String Match by RK") {
         withData(stringMatchCases) { (source, target, index) ->
-            source.findIndexRK(target) shouldBeExactly index
+            source.findIndexRK(target) shouldBe index
         }
     }
 })
