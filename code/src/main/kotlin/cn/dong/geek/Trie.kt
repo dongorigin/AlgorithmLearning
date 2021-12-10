@@ -56,6 +56,7 @@ private class TrieTests : FunSpec({
         trie.insert("hello")
         trie.search("hello") shouldBe true
         trie.startsWith("he") shouldBe true
+        trie.startsWith("hello") shouldBe true
+        trie.startsWith("hellow") shouldBe false
     }
-
 })
