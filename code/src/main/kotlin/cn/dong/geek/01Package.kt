@@ -16,26 +16,19 @@ class Package(
     private val itemWeights: IntArray,
     private val maxWeight: Int,
 ) {
-    var currentMax = 0
-
     fun findMax(): Int {
-        innerFind(maxWeight, 0)
-        return currentMax
+        return innerFindMax(maxWeight, 0)
     }
 
-    /** [index] 待定物品下标 */
-    private fun innerFind(remainingWeight: Int, index: Int) {
-        currentMax = max(currentMax, maxWeight - remainingWeight)
-        if (index >= itemWeights.size) return
-
-        // 装
-        if (itemWeights[index] <= remainingWeight) { // 剪枝
-            innerFind(remainingWeight - itemWeights[index], index + 1)
-        }
-        // 不装
-        innerFind(remainingWeight, index + 1)
+    /** [remainingWeight] 背包剩余负重，[index] 待装物品下标，返回物品总重量 */
+    private fun innerFindMax(remainingWeight: Int, index: Int): Int {
+        if (remainingWeight < 0) return 0
+        if (index >= itemWeights.size) return maxWeight - remainingWeight
+        return max(
+            innerFindMax(remainingWeight - itemWeights[index], index + 1), // 装
+            innerFindMax(remainingWeight, index + 1) // 不装
+        )
     }
-
 }
 
 private class PackageTests : FunSpec({
