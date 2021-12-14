@@ -20,3 +20,16 @@ private fun reverseList(head: ListNode?): ListNode? {
     }
     return h
 }
+
+private fun reverseListByRecursion(head: ListNode?): ListNode? {
+    val next = head?.next
+    return if (next != null) {
+        val h = reverseListByRecursion(next)
+        // 子链表reverse前，next是子链表头节点，子链表reverse后，next就是子链表的尾节点了
+        next.next = head
+        head.next = null
+        h
+    } else {
+        head
+    }
+}
