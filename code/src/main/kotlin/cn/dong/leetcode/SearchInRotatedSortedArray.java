@@ -1,6 +1,6 @@
 package cn.dong.leetcode;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * https://leetcode.com/problems/search-in-rotated-sorted-array
