@@ -5,12 +5,6 @@ package cn.dong.leetcode
  *
  * @author dong on 2021/12/13.
  */
-private class ListNode(val value: Int) {
-    var next: ListNode? = null
-
-    override fun toString(): String = value.toString()
-}
-
 private fun reverseList(head: ListNode?): ListNode? {
     var target = head
     var h: ListNode? = null
