@@ -3,6 +3,9 @@ package cn.dong.leetcode
 import kotlin.test.assertEquals
 import java.util.*
 
+/**
+ * [678. 有效的括号字符串 - 力扣（LeetCode）](https://leetcode-cn.com/problems/valid-parenthesis-string/)
+ */
 class Solution678 {
 
     fun checkValidString(s: String): Boolean {

@@ -3,7 +3,7 @@ package cn.dong.leetcode
 import java.util.*
 
 /**
- * https://leetcode-cn.com/problems/remove-k-digits/
+ * [402. 移掉 K 位数字 - 力扣（LeetCode）](https://leetcode-cn.com/problems/remove-k-digits/)
  * 贪心
  *
  * @author dong on 2021/12/10.

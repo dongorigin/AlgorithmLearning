@@ -3,6 +3,9 @@ package cn.dong.leetcode
 import java.util.*
 import kotlin.test.assertEquals
 
+/**
+ * [20. 有效的括号](https://leetcode-cn.com/problems/valid-parentheses/)
+ */
 class ValidParenthesesChecker {
 
     private val stack = Stack<Char>()

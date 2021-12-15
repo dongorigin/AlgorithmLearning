@@ -1,14 +1,16 @@
 package cn.dong.leetcode
 
 /**
+ * [771. 宝石与石头](https://leetcode-cn.com/problems/jewels-and-stones/)
+ *
  * @author dong on 2018/08/23.
  */
 class JewelsAndStones {
-    fun numJewelsInStones(J: String, S: String): Int {
-        val array = Array<Int>(256, {0})
+    fun numJewelsInStones(jewels: String, stones: String): Int {
+        val array = Array(256) { 0 }
         var count = 0
-        S.forEach { array[it.toInt()]++ }
-        J.forEach { count += array[it.toInt()] }
+        stones.forEach { array[it.toInt()]++ }
+        jewels.forEach { count += array[it.toInt()] }
         return count
     }
 }

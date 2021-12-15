@@ -1,6 +1,8 @@
 package cn.dong.leetcode
 
 /**
+ * [46. 全排列 - 力扣（LeetCode）](https://leetcode-cn.com/problems/permutations/)
+ *
  * @author dong on 2020/08/09.
  */
 class Permutations {
