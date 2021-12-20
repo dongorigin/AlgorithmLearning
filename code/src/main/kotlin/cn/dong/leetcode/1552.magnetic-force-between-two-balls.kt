@@ -15,7 +15,7 @@ class Solution1552 {
         var right = position[position.size - 1]
         var result = left
         while (left <= right) {
-            val mid = (left + right) / 2
+            val mid = left + (right - left) / 2
             if (check(position, m, mid)) {
                 result = mid
                 left = mid + 1
@@ -38,7 +38,6 @@ class Solution1552 {
         }
         return count >= m
     }
-
 }
 
 fun main() {
