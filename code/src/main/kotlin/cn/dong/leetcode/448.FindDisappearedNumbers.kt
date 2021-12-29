@@ -8,7 +8,7 @@ package cn.dong.leetcode
  *
  * @author dong on 2018/08/23.
  */
-class Solution {
+class Solution448 {
     fun findDisappearedNumbers(nums: IntArray): List<Int> {
         var index = 0
         while (index < nums.size) {
@@ -46,6 +46,6 @@ class Solution {
 
 fun main(args: Array<String>) {
     val input = intArrayOf(4, 3, 2, 7, 8, 2, 3, 1)
-    val output = Solution().findDisappearedNumbers(input)
+    val output = Solution448().findDisappearedNumbers(input)
     println(output)
 }
