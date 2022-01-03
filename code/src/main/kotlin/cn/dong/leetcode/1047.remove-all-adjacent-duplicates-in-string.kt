@@ -5,7 +5,7 @@ package cn.dong.leetcode
  *
  * @author dong on 2021/12/29.
  */
-class Solution {
+class Solution1047 {
     fun removeDuplicates(s: String): String {
         val sb = StringBuilder()
         for (char in s) {
