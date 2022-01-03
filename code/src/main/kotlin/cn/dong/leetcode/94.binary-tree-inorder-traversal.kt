@@ -22,13 +22,30 @@ class Solution94 {
         val stack = Stack<TreeNode>()
         var cur = root
         while (cur != null || stack.isNotEmpty()) {
-            if (cur != null) {
+            while (cur != null) {
                 stack.push(cur)
                 cur = cur.left
+            }
+            cur = stack.pop()
+            result.add(cur.`val`)
+            cur = cur.right
+        }
+        return result
+    }
+
+    fun inorderTraversalByIteration2(root: TreeNode?): List<Int> {
+        val result = mutableListOf<Int>()
+        val stack = Stack<Pair<TreeNode?, Boolean>>()
+        stack.push(root to false)
+        while (stack.isNotEmpty()) {
+            val (node, visited) = stack.pop()
+            if (node == null) continue
+            if (visited) {
+                result.add(node.`val`)
             } else {
-                cur = stack.pop()
-                result.add(cur.`val`)
-                cur = cur.right
+                stack.push(node.right to false)
+                stack.push(node to true)
+                stack.push(node.left to false)
             }
         }
         return result

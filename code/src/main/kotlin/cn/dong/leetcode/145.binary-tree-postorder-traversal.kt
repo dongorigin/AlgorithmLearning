@@ -40,4 +40,22 @@ class Solution145 {
         }
         return result
     }
+
+    fun postorderTraversalByIteration2(root: TreeNode?): List<Int> {
+        val result = mutableListOf<Int>()
+        val stack = Stack<Pair<TreeNode?, Boolean>>()
+        stack.push(root to false)
+        while (stack.isNotEmpty()) {
+            val (node, visited) = stack.pop()
+            if (node == null) continue
+            if (visited) {
+                result.add(node.`val`)
+            } else {
+                stack.push(node to true)
+                stack.push(node.right to false)
+                stack.push(node.left to false)
+            }
+        }
+        return result
+    }
 }
