@@ -6,16 +6,17 @@ package cn.dong.leetcode
  * @author dong on 2021/12/13.
  */
 class Solution206 {
+    /* 头插法 */
     fun reverseList(head: ListNode?): ListNode? {
-        val dummy = ListNode(-1)
         var cur = head
+        var newHead : ListNode? = null
         while (cur != null) {
             val next = cur.next
-            cur.next = dummy.next
-            dummy.next = cur
+            cur.next = newHead
+            newHead = cur
             cur = next
         }
-        return dummy.next
+        return newHead
     }
 
     fun reverseList2(head: ListNode?): ListNode? {
@@ -30,6 +31,7 @@ class Solution206 {
         return prev
     }
 
+    /* 尾插法 */
     fun reverseListByRecursion(head: ListNode?): ListNode? {
         val next = head?.next
         if (next == null) return head
