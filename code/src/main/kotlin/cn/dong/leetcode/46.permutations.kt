@@ -5,7 +5,50 @@ package cn.dong.leetcode
  *
  * @author dong on 2020/08/09.
  */
-class Permutations {
+class Solution46 {
+    /** 通过记录与修改状态变量来回溯，减少产生的中间变量 */
+    fun permute(nums: IntArray): List<List<Int>> {
+        val result = mutableListOf<List<Int>>()
+        val state = State(nums)
+        dfs(state, result)
+        return result
+    }
+
+    /** 搜索路径状态，用于回溯 */
+    private class State(
+        val nums: IntArray
+    ) {
+        val path: MutableList<Int> = mutableListOf()
+        val used: BooleanArray = BooleanArray(nums.size)
+
+        fun isUsed(index: Int): Boolean = used[index]
+        fun setUsed(index: Int, use: Boolean) {
+            used[index] = use
+        }
+    }
+
+    private fun dfs(state: State, result: MutableList<List<Int>>) {
+        if (state.path.size == state.nums.size) {
+            result.add(state.path.toList())
+            return
+        }
+
+        for ((index, num) in state.nums.withIndex()) {
+            if (state.isUsed(index)) continue
+
+            state.setUsed(index, true)
+            state.path.add(num)
+
+            dfs(state, result)
+
+            state.path.removeAt(state.path.size - 1)
+            state.setUsed(index, false)
+        }
+    }
+}
+
+class Solution46_2 {
+    /** 产生中间变量较多，性能消耗较大 */
     fun permute(nums: IntArray): List<List<Int>> {
         return permute(emptyList(), nums.toList())
     }
@@ -31,6 +74,6 @@ class Permutations {
 }
 
 fun main() {
-    val permute = Permutations().permute(intArrayOf(1, 2, 3))
-    print(permute)
+    val permute = Solution46().permute(intArrayOf(1, 2, 3))
+    println(permute)
 }

@@ -4,40 +4,46 @@ import io.kotest.matchers.shouldBe
 
 /**
  * [47. 全排列 II - 力扣（LeetCode）](https://leetcode-cn.com/problems/permutations-ii/)
+ *
  * @author dong on 2022/01/05.
  */
 class Solution47 {
     fun permuteUnique(nums: IntArray): List<List<Int>> {
         nums.sort()
-        return permute(nums.toList())
+        val result = mutableListOf<List<Int>>()
+        val state = State(nums)
+        dfs(state, result)
+        return result
     }
 
-    fun permute(nums: List<Int>): List<List<Int>> {
-        val result = mutableListOf<List<Int>>()
-        if (nums.size == 0) {
-            return result
-        }
-        if (nums.size == 1) {
-            result.add(listOf(nums.first()))
-            return result
+    private class State(
+        val nums: IntArray
+    ) {
+        val path = ArrayList<Int>(nums.size)
+        val used = BooleanArray(nums.size)
+    }
+
+    private fun dfs(state: State, result: MutableList<List<Int>>) {
+        if (state.path.size == state.nums.size) {
+            result.add(state.path.toList())
+            return
         }
 
-        // 第一位数字固定 + 剩下数字的全排列
-        // 第一位数字不能重复，排序+记录上一个
-        var lastNum: Int? = null
-        for ((index, num) in nums.withIndex()) {
-            if (num == lastNum) continue
-            lastNum = num
-
-            val remainNums = nums.toMutableList()
-            remainNums.removeAt(index)
-            for (remainPermute in permute(remainNums)) {
-                val list = mutableListOf(num)
-                list.addAll(remainPermute)
-                result.add(list)
+        var last: Int? = null
+        for ((index, num) in state.nums.withIndex()) {
+            if (state.used[index] || num == last) {
+                continue
             }
+            last = num
+
+            state.path.add(num)
+            state.used[index] = true
+
+            dfs(state, result)
+
+            state.path.removeAt(state.path.size - 1)
+            state.used[index] = false
         }
-        return result
     }
 }
 
