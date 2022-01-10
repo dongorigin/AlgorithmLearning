@@ -5,37 +5,45 @@ package cn.dong.leetcode
  *
  * @author dong on 2021/12/15.
  */
-fun mergeTwoLists(list1: ListNode?, list2: ListNode?): ListNode? {
-    val dummy = ListNode(-1)
-    var prev = dummy
-    var l1: ListNode? = list1
-    var l2: ListNode? = list2
-    while (l1 != null && l2 != null) {
-        if (l1.`val` < l2.`val`) {
-            prev.next = l1
-            prev = l1
-            l1 = l1.next
-        } else {
-            prev.next = l2
-            prev = l2
-            l2 = l2.next
-        }
-    }
-    if (l1 != null) prev.next = l1
-    if (l2 != null) prev.next = l2
-    return dummy.next
-}
+class Solution21 {
 
-fun mergeTwoListsByRecursion(list1: ListNode?, list2: ListNode?): ListNode? {
-    return if (list1 == null) {
-        list2
-    } else if (list2 == null) {
-        list1
-    } else if (list1.`val` < list2.`val`) {
-        list1.next = mergeTwoLists(list1.next, list2)
-        list1
-    } else {
-        list2.next = mergeTwoLists(list1, list2.next)
-        list2
+    fun mergeTwoLists(list1: ListNode?, list2: ListNode?): ListNode? {
+        var l1 = list1
+        var l2 = list2
+        val preHead = ListNode(-1)
+        var prev = preHead
+        while (l1 != null && l2 != null) {
+            if (l1.`val` < l2.`val`) {
+                prev.next = l1
+                prev = l1
+                l1 = l1.next
+            } else {
+                prev.next = l2
+                prev = l2
+                l2 = l2.next
+            }
+        }
+        if (l1 == null) {
+            prev.next = l2
+        } else {
+            prev.next = l1
+        }
+        return preHead.next
+    }
+
+    fun mergeTwoListsByRecursion(list1: ListNode?, list2: ListNode?): ListNode? {
+        return if (list1 == null) {
+            list2
+        } else if (list2 == null) {
+            list1
+        } else {
+            if (list1.`val` < list2.`val`) {
+                list1.next = mergeTwoListsByRecursion(list1.next, list2)
+                list1
+            } else {
+                list2.next = mergeTwoListsByRecursion(list1, list2.next)
+                list2
+            }
+        }
     }
 }
