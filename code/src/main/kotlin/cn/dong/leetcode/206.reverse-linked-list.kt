@@ -6,20 +6,10 @@ package cn.dong.leetcode
  * @author dong on 2021/12/13.
  */
 class Solution206 {
-    /* 头插法 */
+    /**
+     * 迭代
+     */
     fun reverseList(head: ListNode?): ListNode? {
-        var cur = head
-        var newHead : ListNode? = null
-        while (cur != null) {
-            val next = cur.next
-            cur.next = newHead
-            newHead = cur
-            cur = next
-        }
-        return newHead
-    }
-
-    fun reverseList2(head: ListNode?): ListNode? {
         var prev : ListNode? = null
         var cur = head
         while (cur != null) {
@@ -31,12 +21,14 @@ class Solution206 {
         return prev
     }
 
-    /* 尾插法 */
+    /**
+     * 递归
+     */
     fun reverseListByRecursion(head: ListNode?): ListNode? {
         val next = head?.next
         if (next == null) return head
 
-        val newHead = reverseList(next)
+        val newHead = reverseListByRecursion(next)
         // 子链表reverse前，next是子链表头节点，子链表reverse后，next就是子链表的尾节点了
         head.next = null
         next.next = head
