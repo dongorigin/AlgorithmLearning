@@ -7,17 +7,17 @@ package cn.dong.leetcode
  */
 class Solution24 {
     fun swapPairs(head: ListNode?): ListNode? {
-        val dummy = ListNode(-1)
-        dummy.next = head
-        var prev = dummy
-        while (prev.next != null && prev.next!!.next != null) {
-            val cur = prev.next!!
-            val next = prev.next!!.next
-            cur.next = next?.next
-            next?.next = cur
-            prev.next = next
-            prev = cur
+        val prevHead = ListNode(-1)
+        prevHead.next = head
+        var prev = prevHead
+        while (prev.next?.next != null) {
+            val p1 = prev.next!!
+            val p2 = prev.next!!.next
+            p1.next = p2?.next
+            p2?.next = p1
+            prev.next = p2
+            prev = p1
         }
-        return dummy.next
+        return prevHead.next
     }
 }
