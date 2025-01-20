@@ -6,19 +6,19 @@ package cn.dong.leetcode
  */
 class Solution19 {
     fun removeNthFromEnd(head: ListNode?, n: Int): ListNode? {
-        val dummy = ListNode(-1)
-        dummy.next = head
-        var fast = dummy
-        var slow = dummy
+        val prevHead = ListNode(-1)
+        prevHead.next = head
+        var fast = prevHead
+        var prev = prevHead
         for (i in 1..n) {
             fast = fast.next!!
         }
         while (fast.next != null) {
             fast = fast.next!!
-            slow = slow.next!!
+            prev = prev.next!!
         }
-        // fast == last
-        slow.next = slow.next!!.next
-        return dummy.next
+        // `fast` points to the last item of the list
+        prev.next = prev.next?.next
+        return prevHead.next
     }
 }
