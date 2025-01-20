@@ -7,23 +7,21 @@ package cn.dong.leetcode
  */
 class Solution92 {
     fun reverseBetween(head: ListNode?, left: Int, right: Int): ListNode? {
-        val dummy = ListNode(-1)
-        dummy.next = head
-
-        var leftPrev = dummy
-        var cur = dummy.next
+        val prevHead = ListNode(-1)
+        prevHead.next = head
+        var prevLeft = prevHead
 
         for (i in 1..left - 1) {
-            leftPrev = leftPrev.next!!
-            cur = cur?.next
+            prevLeft = prevLeft.next!!
         }
+        val cur = prevHead.next
 
         for (i in 1..right - left) {
-            val removed = cur!!.next!!
-            cur.next = removed.next
-            removed.next = leftPrev.next
-            leftPrev.next = removed
+            val next = cur?.next
+            cur?.next = next?.next
+            next?.next = prevLeft.next
+            prevLeft.next = next
         }
-        return dummy.next
+        return prevHead.next
     }
 }
