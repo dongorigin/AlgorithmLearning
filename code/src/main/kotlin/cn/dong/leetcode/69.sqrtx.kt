@@ -15,8 +15,10 @@ class Solution69 {
         var high = x
         while (low <= high) {
             val mid = low + (high - low) / 2
-            val mPower = mid.toLong() * mid
-            if (mPower <= x) {
+            val power = mid.toLong() * mid
+            if (power == x.toLong())
+                return mid
+            if (power < x) {
                 result = mid
                 low = mid + 1
             } else {
@@ -30,5 +32,7 @@ class Solution69 {
 fun main() {
     Solution69().mySqrt(0) shouldBe 0
     Solution69().mySqrt(1) shouldBe 1
+    Solution69().mySqrt(4) shouldBe 2
+    Solution69().mySqrt(8) shouldBe 2
     Solution69().mySqrt(2147395599) shouldBe 46339
 }
