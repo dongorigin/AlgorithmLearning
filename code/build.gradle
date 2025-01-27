@@ -1,22 +1,22 @@
-apply plugin: 'java'
-apply plugin: 'kotlin'
+plugins {
+    alias(libs.plugins.kotlin.jvm)
+    id 'application'
+}
 
-sourceCompatibility = 1.8
+ext.kotest_version = '5.0.1'
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-    implementation "org.jetbrains.kotlin:kotlin-test:$kotlin_version"
-
     // test
+    implementation 'org.jetbrains.kotlin:kotlin-test-junit5'
     implementation "io.kotest:kotest-runner-junit5:$kotest_version"
     implementation "io.kotest:kotest-assertions-core:$kotest_version"
     implementation "io.kotest:kotest-framework-datatest:$kotest_version"
 }
 
-test {
+tasks.named('test') {
     useJUnitPlatform()
 }
