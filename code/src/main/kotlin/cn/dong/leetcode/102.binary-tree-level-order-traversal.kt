@@ -8,20 +8,20 @@ import java.util.*
  */
 class Solution102 {
     fun levelOrder(root: TreeNode?): List<List<Int>> {
-        val lists = mutableListOf<List<Int>>()
-        if (root == null) return lists
+        val layers = mutableListOf<List<Int>>()
+        if (root == null) return layers
         val queue: Queue<TreeNode> = LinkedList()
         queue.add(root)
         while (queue.isNotEmpty()) {
-            val list = mutableListOf<Int>()
+            val layer = mutableListOf<Int>()
             for (i in 1..queue.size) {
-                val node = queue.poll()!!
-                list.add(node.`val`)
+                val node = queue.poll()
+                layer.add(node.`val`)
                 node.left?.let { queue.add(it) }
                 node.right?.let { queue.add(it) }
             }
-            lists.add(list)
+            layers.add(layer)
         }
-        return lists
+        return layers
     }
 }
