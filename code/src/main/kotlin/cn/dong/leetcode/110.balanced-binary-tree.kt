@@ -8,7 +8,7 @@ import io.kotest.matchers.shouldBe
  * @author dong on 2021/12/22.
  */
 class Solution110 {
-    var count = 0
+    var count = 0 // for benchmark
 
     /** 后序遍历，从底至顶处理子树，同时算子树的高度和判断平衡，避免了重复遍历，时间复杂度 O(n) */
     fun isBalanced(root: TreeNode?): Boolean {
@@ -31,9 +31,9 @@ class Solution110 {
 }
 
 class Solution110_2 {
-    var count = 0
+    var count = 0 // for benchmark
 
-    /** 后序遍历，但是对每个子树会重复调用多次 height，时间复杂度 O(n log n) */
+    /** 对每个子树会重复计算多次 height，时间复杂度 O(n log n) */
     fun isBalanced(root: TreeNode?): Boolean {
         if (root == null) return true
         return isBalanced(root.left)
