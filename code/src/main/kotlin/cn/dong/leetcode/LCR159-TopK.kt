@@ -6,45 +6,39 @@ package cn.dong.leetcode
  */
 class SolutionLCR159 {
     fun inventoryManagement(stock: IntArray, cnt: Int): IntArray {
-        bottomK(stock, 0, stock.size - 1, cnt)
-        // the [0, cnt-1] are smallest K numbers in the list
 
-        // copy to new array
-        val result = IntArray(cnt) { i ->
-            stock[i]
-        }
-        return result
-    }
-
-    private fun bottomK(array: IntArray, start: Int, end: Int, k: Int) {
-        if (start >= end) return // ??
-
-        val pivot = partition(array, start, end)
-        if (pivot == k - 1) {
-            // [0, pivot] are smallest K numbers
-            return
-        } else if (pivot > k - 1) {
-            // [0, pivot] are smallest numbers, but the count is greater than k, so we need to search in the [start, pivot-1]
-            bottomK(array, start, pivot - 1, k)
-        } else { // pivot < k-1
-            // [0, pivot] are smallest numbers, but the count is less than k, so we need to search in the [pivot+1, end]
-            bottomK(array, pivot + 1, end, k)
+        var start = 0
+        var end = stock.size - 1
+        while (true) {
+            val pivotIndex = partition(stock, start, end)
+            if (pivotIndex == cnt) {
+                // [0, index-1]
+                return stock.sliceArray(0..pivotIndex - 1)
+            } else if (pivotIndex + 1 == cnt) {
+                // [0, index]
+                return stock.sliceArray(0..pivotIndex)
+            } else if (pivotIndex > cnt) {
+                end = pivotIndex - 1
+            } else { // pivotIndex < cnt
+                start = pivotIndex + 1
+            }
         }
     }
 
     /**
-     * return the index of pivot
-     * [start, pivot-1] less than array[pivot]
-     * [pivot+1, end] greater than or equal to array[pivot]
+     * after partition, there are three ranges:
+     * - [start, m-1]: less than or equal to pivot
+     * - m: it is pivot
+     * - [m+1, end]: greater than pivot
+     *
+     * return index of pivot
      */
-    private fun partition(array: IntArray, start: Int, end: Int): Int {
+    fun partition(array: IntArray, start: Int, end: Int): Int {
         val pivot = array[end]
-
-        // [start, i-1] less than pivot
-        // [i, end-1] greater than pivot
         var i = start
+        // range [start, i-1] are less than pivot
         for (j in start..end - 1) {
-            if (array[j] < pivot) {
+            if (array[j] <= pivot) {
                 array.swap(i, j)
                 i++
             }
@@ -53,8 +47,7 @@ class SolutionLCR159 {
         return i
     }
 
-    private fun IntArray.swap(i: Int, j: Int) {
-        if (i==j ) return
+    fun IntArray.swap(i: Int, j: Int) {
         val temp = this[i]
         this[i] = this[j]
         this[j] = temp
