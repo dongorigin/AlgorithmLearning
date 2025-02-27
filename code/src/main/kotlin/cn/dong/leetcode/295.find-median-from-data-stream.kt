@@ -3,6 +3,8 @@ package cn.dong.leetcode
 import java.util.PriorityQueue
 
 /**
+ * [295. 数据流的中位数 - 力扣（LeetCode）](https://leetcode.cn/problems/find-median-from-data-stream)
+ *
  * Your MedianFinder object will be instantiated and called as such:
  * var obj = MedianFinder()
  * obj.addNum(num)
