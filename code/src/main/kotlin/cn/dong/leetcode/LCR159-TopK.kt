@@ -1,5 +1,7 @@
 package cn.dong.leetcode
 
+import java.util.PriorityQueue
+
 /**
  * [LCR 159. 库存管理 III - 力扣（LeetCode）](https://leetcode.cn/problems/zui-xiao-de-kge-shu-lcof/)
  * Top K 变形
@@ -51,5 +53,18 @@ class SolutionLCR159 {
         val temp = this[i]
         this[i] = this[j]
         this[j] = temp
+    }
+
+    fun inventoryManagement_heap(stock: IntArray, cnt: Int): IntArray {
+        val heap = PriorityQueue<Int> { o1, o2 ->
+            o2.compareTo(o1)
+        }
+        for (i in stock) {
+            heap.add(i)
+            if (heap.size > cnt) {
+                heap.poll()
+            }
+        }
+        return heap.toIntArray()
     }
 }
