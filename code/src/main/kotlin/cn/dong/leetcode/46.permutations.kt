@@ -73,6 +73,28 @@ class Solution46_2 {
     }
 }
 
+class Solution46_3 {
+
+    fun permute(nums: IntArray): List<List<Int>> {
+        return permuteList(nums.toMutableList())
+    }
+
+    fun permuteList(nums: MutableList<Int>): List<MutableList<Int>> {
+        if (nums.size == 1) return listOf(mutableListOf(nums.first()))
+        val result = mutableListOf<MutableList<Int>>()
+        for (num in nums) {
+            val subList = nums.toMutableList().apply {
+                remove(num)
+            }
+            permuteList(subList).forEach {
+                it.add(0, num)
+                result.add(it)
+            }
+        }
+        return result
+    }
+}
+
 fun main() {
     val permute = Solution46().permute(intArrayOf(1, 2, 3))
     println(permute)
