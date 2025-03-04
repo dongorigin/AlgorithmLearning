@@ -8,24 +8,24 @@ import io.kotest.matchers.shouldBe
  * @author dong on 2021/12/22.
  */
 class Solution209 {
-    // [left, right)
     fun minSubArrayLen(target: Int, nums: IntArray): Int {
         var left = 0
-        var right = 0
-        var minLen = 0
+        var minLength = 0
         var sum = 0
-        for (right in 0 until nums.size) {
+        for (right in nums.indices) {
             sum += nums[right]
+            // 单调性：从满足要求，变成不满足要求
             while (sum >= target) {
-                val len = right - left + 1
-                if (minLen == 0 || len < minLen) {
-                    minLen = len
+                val length = right - left + 1
+                if (minLength == 0 || length < minLength) {
+                    minLength = length
                 }
+
                 sum -= nums[left]
                 left++
             }
         }
-        return minLen
+        return minLength
     }
 }
 
